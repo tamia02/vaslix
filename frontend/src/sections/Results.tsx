@@ -36,13 +36,13 @@ const caseStudies = [
         company: 'Nexus Technical',
         result: 'Reduced qualification latency by 98%',
         description: 'Autonomous voice modules now handle 100% of global inbound volume, increasing pipeline velocity by 4x.',
-        image: '/C:/Users/tasmi/.gemini/antigravity/brain/a41e6227-9553-474e-8be0-6f782829ac75/case_study_nexus_tech_1772388796738.png'
+        image: '/images/nexus_tech.png'
     },
     {
         company: 'Aether Logistics',
         result: 'Recovered $2.1M in dormant revenue',
         description: 'Workflow intelligence autonomously synchronized CRM intent signals with real-time billing remediation.',
-        image: '/C:/Users/tasmi/.gemini/antigravity/brain/a41e6227-9553-474e-8be0-6f782829ac75/case_study_aether_logistics_new_1772388843150.png'
+        image: '/images/aether_logistics.png'
     }
 ];
 
