@@ -1,0 +1,117 @@
+/* Enterprise Footer Styles */
+.footer-enterprise {
+    padding: 100px 0 40px;
+    background-color: var(--bg-primary);
+    border-top: 1px solid var(--border-primary);
+    position: relative;
+    z-index: 10;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+    margin-bottom: 80px;
+}
+
+.footer-brand {
+    max-width: 300px;
+}
+
+.footer-logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+}
+
+.footer-tagline {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-link {
+    color: var(--text-secondary);
+    transition: color 0.3s;
+}
+
+.social-link:hover {
+    color: var(--accent-primary);
+}
+
+.footer-nav {
+    display: flex;
+    gap: 80px;
+}
+
+.footer-column h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-column a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.footer-column a:hover {
+    color: var(--text-primary);
+}
+
+.footer-bottom {
+    padding-top: 40px;
+    border-top: 1px solid var(--border-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.footer-bottom-links {
+    display: flex;
+    gap: 32px;
+}
+
+.footer-bottom-links a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-bottom-links a:hover {
+    color: var(--text-primary);
+}
+
+@media (max-width: 1024px) {
+    .footer-grid {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .footer-nav {
+        gap: 40px;
+        flex-wrap: wrap;
+    }
+}

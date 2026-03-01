@@ -1,0 +1,1 @@
+{"version":3,"file":"SpeechProcessor.js","sourceRoot":"","sources":["../../../src/core/SpeechProcessor.ts"],"names":[],"mappings":";;;AAYA;;GAEG;AACH,MAAa,sBAAsB;IAC/B,KAAK,CAAC,WAAW,CAAC,SAAiB;QAC/B,yBAAyB;QACzB,OAAO,8CAA8C,CAAC;IAC1D,CAAC;IAED,KAAK,CAAC,WAAW,CAAC,IAAY;QAC1B,yBAAyB;QACzB,OAAO,MAAM,CAAC,IAAI,CAAC,wBAAwB,CAAC,CAAC;IACjD,CAAC;CACJ;AAVD,wDAUC"}

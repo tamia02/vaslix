@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Elite Glassmorphism & Atmospheric Tokens */
+  --bg-base: #F0F4F8;
+  /* Deeper atmospheric tint */
+  --bg-surface: rgba(255, 255, 255, 0.7);
+  /* Frosted base */
+  --bg-elevated: rgba(255, 255, 255, 0.9);
+  /* Higher frost */
+
+  --glass-bg: rgba(255, 255, 255, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-blur: blur(24px);
+
+  --accent-primary: #0066CC;
+  --accent-secondary: #0F172A;
+  --accent-success: #10B981;
+
+  --text-main: #0F172B;
+  --text-muted: #64748B;
+  --text-ghost: #94A3B8;
+
+  --border-subtle: rgba(15, 23, 42, 0.04);
+  --border-strong: rgba(15, 23, 42, 0.08);
+
+  --shadow-expensive: 0 40px 100px -20px rgba(0, 0, 0, 0.08), 0 10px 40px -10px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 60px 120px -30px rgba(0, 0, 0, 0.12), 0 20px 60px -15px rgba(0, 0, 0, 0.06);
+
+  --radius-xl: 32px;
+  /* Smoother, larger radii like reference */
+  --radius-lg: 24px;
+  --radius-md: 16px;
+
+  --container-max: 1400px;
+  /* Wider layout */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* High-Tension Typography Hierarchy */
+h1 {
+  font-weight: 950;
+  letter-spacing: -0.06em;
+  /* Even tighter for elite feel */
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+h2 {
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+h3 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+section {
+  padding: 160px 0;
+  position: relative;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.card {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 40px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-premium);
+  border-color: var(--border-premium);
+}
+
+.btn {
+  padding: 12px 32px;
+  border-radius: 12px;
+  /* Precision corner */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: none;
+  text-decoration: none;
+  position: relative;
+}
+
+/* Expensive Primary Button */
+.btn-primary {
+  background: linear-gradient(180deg, #0077EE 0%, #0066CC 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 102, 204, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  filter: brightness(1.05);
+}
+
+/* Engineered Secondary Button */
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-base);
+  border-color: var(--text-muted);
+  transform: translateY(-1px);
+}
+
+.text-gradient {
+  background: linear-gradient(180deg, #1D1D1F 0%, #6E6E73 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Smooth Transitions */
+.fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 3px solid white;
+}

@@ -1,0 +1,127 @@
+.pricing-section {
+    padding: 160px 0;
+    background-color: var(--bg-surface);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: 80px;
+    align-items: center;
+}
+
+.pricing-card.card {
+    background: var(--bg-elevated);
+    border-radius: 20px;
+    padding: 64px 48px;
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-expensive);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card.popular {
+    border-color: var(--accent-primary);
+    transform: scale(1.04);
+    box-shadow: var(--shadow-hover);
+    z-index: 10;
+}
+
+.pricing-card.popular::before {
+    content: 'RECOMMENDED INFRASTRUCTURE';
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-primary);
+    color: white;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.pricing-card:hover:not(.popular) {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.plan-header h3 {
+    font-size: 1.75rem;
+    font-weight: 950;
+    letter-spacing: -0.04em;
+    margin-bottom: 32px;
+}
+
+.plan-price {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.amount {
+    font-size: 4rem;
+    font-weight: 950;
+    letter-spacing: -0.05em;
+    color: var(--text-main);
+    line-height: 1;
+}
+
+.period {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-ghost);
+}
+
+.plan-description {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 48px;
+    min-height: 3em;
+}
+
+.plan-features {
+    margin-bottom: 48px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.feature-icon {
+    color: var(--accent-primary);
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.feature-item span {
+    font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        gap: 48px;
+    }
+
+    .pricing-card.popular {
+        transform: none;
+    }
+}

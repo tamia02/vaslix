@@ -1,0 +1,83 @@
+/* Global Motion & Polish Layer */
+
+/* System Fade Reveals */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Base Light Mode Refinement */
+section {
+    position: relative;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: radial-gradient(circle, var(--border-strong) 0%, transparent 70%);
+}
+
+/* System Label Style */
+.section-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--bg-base);
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-primary);
+    margin-bottom: 24px;
+}
+
+/* Kinetic Hover States */
+.card-hover-kinetic:hover {
+    transform: scale(1.02) translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Status Pulse Base */
+.system-pulse {
+    width: 10px;
+    height: 10px;
+    background: var(--accent-success);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent-success);
+}
+
+@keyframes systemPulse {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Custom Selection */
+::selection {
+    background: var(--accent-primary);
+    color: white;
+}
