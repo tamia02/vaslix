@@ -30,7 +30,7 @@ export const Navbar = () => {
                     </button>
                     <button
                         className="btn btn-primary btn-sm nav-cta"
-                        onClick={() => document.getElementById('studio')?.scrollIntoView({ behavior: 'smooth' })}
+                        onClick={() => window.open('https://calendly.com/tasmiyasiddiqui457/quick-discovery-call', '_blank')}
                     >
                         Deploy <ArrowRight size={12} className="ml-2" />
                     </button>

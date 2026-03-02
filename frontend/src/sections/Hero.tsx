@@ -59,7 +59,7 @@ export const Hero = () => {
                     <motion.div variants={itemVariants} className="hero-actions">
                         <button
                             className="btn btn-primary btn-lg !rounded-full !px-10"
-                            onClick={() => document.getElementById('studio')?.scrollIntoView({ behavior: 'smooth' })}
+                            onClick={() => window.open('https://calendly.com/tasmiyasiddiqui457/quick-discovery-call', '_blank')}
                         >
                             Deploy Agent
                         </button>

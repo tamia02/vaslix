@@ -43,7 +43,7 @@ export const Footer = () => {
                 <div className="footer-bottom">
                     <p>© 2026 VASLIX AI. All rights reserved.</p>
                     <div className="footer-bottom-links">
-                        <a href="mailto:hello@vaslix.ai"><Mail size={14} /> hello@vaslix.ai</a>
+                        <a href="mailto:tasmiya@vaslix.in"><Mail size={14} /> tasmiya@vaslix.in</a>
                         <a href="#"><Globe size={14} /> Global / English</a>
                     </div>
                 </div>

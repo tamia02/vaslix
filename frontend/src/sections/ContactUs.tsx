@@ -35,7 +35,7 @@ export const ContactUs = () => {
                             <div className="item-icon"><Mail size={20} /></div>
                             <div className="item-text">
                                 <h4>Email Us</h4>
-                                <p>partners@vaslix.ai</p>
+                                <p>tasmiya@vaslix.in</p>
                             </div>
                         </div>
                         <div className="contact-item">
@@ -49,7 +49,7 @@ export const ContactUs = () => {
                             <div className="item-icon"><MapPin size={20} /></div>
                             <div className="item-text">
                                 <h4>Global Hub</h4>
-                                <p>San Francisco, CA</p>
+                                <p>India</p>
                             </div>
                         </div>
                     </div>
