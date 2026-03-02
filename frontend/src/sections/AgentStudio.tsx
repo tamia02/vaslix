@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, MessageSquare, Mail, Calendar, Settings, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { Phone, MessageSquare, Mail, Calendar, Settings, RefreshCw, CheckCircle2, Terminal, Power } from 'lucide-react';
 import { Canvas } from '@react-three/fiber';
 import { AICore } from '../components/canvas/AICore';
 
@@ -43,13 +43,82 @@ const agents = [
     }
 ];
 
+const CommandStream = ({ agentId, onStop }: { agentId: string, onStop: () => void }) => {
+    const [logs, setLogs] = useState<string[]>([]);
+    const bottomRef = useRef<HTMLDivElement>(null);
+    const wsRef = useRef<WebSocket | null>(null);
+
+    useEffect(() => {
+        const ws = new WebSocket(`ws://localhost:8000/api/ws/agents/${agentId}`);
+        wsRef.current = ws;
+
+        ws.onopen = () => {
+            setLogs(['> WebSocket Connection Established...', '> Authenticating module access...']);
+        };
+
+        ws.onmessage = (event) => {
+            setLogs(prev => [...prev, event.data]);
+        };
+
+        ws.onerror = () => {
+            setLogs(prev => [...prev, '> Connection error detected...']);
+        };
+
+        return () => {
+            if (ws.readyState === WebSocket.OPEN) {
+                ws.close();
+            }
+        };
+    }, [agentId]);
+
+    useEffect(() => {
+        if (bottomRef.current) {
+            bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [logs]);
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="mt-6 rounded-xl bg-slate-900 border border-slate-800 overflow-hidden relative shadow-inner"
+        >
+            <div className="flex items-center justify-between px-3 py-2 bg-slate-950 border-b border-slate-800">
+                <div className="flex items-center gap-2">
+                    <Terminal size={12} className="text-emerald-500" />
+                    <span className="text-[9px] font-mono text-slate-400 tracking-wider">tty-{agentId} / LIVE</span>
+                </div>
+                <button
+                    onClick={onStop}
+                    className="flex items-center gap-1.5 text-[9px] font-bold text-rose-500 hover:text-rose-400 hover:bg-rose-500/10 px-2 py-1 rounded transition-colors tracking-widest uppercase"
+                >
+                    <Power size={10} /> Deactivate
+                </button>
+            </div>
+            <div className="p-3 h-[180px] overflow-y-auto font-mono text-[11px] text-emerald-400/90 leading-relaxed custom-scrollbar">
+                {logs.map((log, i) => (
+                    <motion.div
+                        initial={{ opacity: 0, x: -5 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        key={i}
+                        className="mb-1.5 flex"
+                    >
+                        <span className="opacity-50 mr-2 text-[9px] mt-[2px]">{new Date().toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' })}</span>
+                        <span>{log}</span>
+                    </motion.div>
+                ))}
+                <div ref={bottomRef} />
+            </div>
+        </motion.div>
+    );
+};
+
 export const AgentStudio = () => {
     const [activeStates, setActiveStates] = useState<Record<string, 'idle' | 'syncing' | 'active'>>({});
 
     const handleConfigure = (id: string) => {
         setActiveStates(prev => ({ ...prev, [id]: 'syncing' }));
-
-        // Simulate infrastructure provisioning
         setTimeout(() => {
             setActiveStates(prev => ({ ...prev, [id]: 'active' }));
         }, 2000);
@@ -71,10 +140,10 @@ export const AgentStudio = () => {
                         return (
                             <motion.div
                                 key={agent.id}
-                                className={`agent-card card bespoke-card ${state === 'active' ? 'ring-2 ring-emerald-500/30' : ''}`}
+                                className={`agent-card card bespoke-card transition-all duration-500 ${state === 'active' ? 'ring-2 ring-emerald-500/30 bg-white/60 shadow-xl scale-[1.02]' : ''}`}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                whileHover={{ y: -12, transition: { duration: 0.4 } }}
+                                whileHover={{ y: state === 'active' ? 0 : -12, transition: { duration: 0.4 } }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1, duration: 0.8 }}
                                 style={{ color: agent.color }}
@@ -94,42 +163,67 @@ export const AgentStudio = () => {
                                 <h3 className="text-slate-950">{agent.name}</h3>
                                 <p className="font-medium">{agent.description}</p>
 
-                                <div className="agent-metrics">
-                                    <div className="metric-item">
-                                        <span className="metric-label">Active Modules</span>
-                                        <span className="metric-value text-slate-900">{agent.active}</span>
-                                    </div>
-                                    <div className="metric-item">
-                                        <span className="metric-label">Avg Latency</span>
-                                        <span className="metric-value text-slate-900">{agent.latency}</span>
-                                    </div>
-                                </div>
+                                <AnimatePresence mode="popLayout">
+                                    {state === 'active' ? (
+                                        <CommandStream
+                                            key="stream"
+                                            agentId={agent.id}
+                                            onStop={() => setActiveStates(prev => ({ ...prev, [agent.id]: 'idle' }))}
+                                        />
+                                    ) : (
+                                        <motion.div
+                                            key="metrics"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            className="agent-metrics"
+                                        >
+                                            <div className="metric-item">
+                                                <span className="metric-label">Active Modules</span>
+                                                <span className="metric-value text-slate-900">{agent.active}</span>
+                                            </div>
+                                            <div className="metric-item">
+                                                <span className="metric-label">Avg Latency</span>
+                                                <span className="metric-value text-slate-900">{agent.latency}</span>
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
 
-                                <div className="agent-footer">
-                                    <button
-                                        onClick={() => handleConfigure(agent.id)}
-                                        disabled={state !== 'idle'}
-                                        className={`btn btn-sm !py-2.5 !px-5 !rounded-lg text-[10px] font-black uppercase tracking-widest transition-all
-                                            ${state === 'idle' ? 'btn-secondary' : state === 'syncing' ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-emerald-50 text-emerald-600 border-emerald-200'}
-                                        `}
-                                    >
-                                        <AnimatePresence mode="wait">
-                                            {state === 'idle' ? (
-                                                <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2">
-                                                    Configure <Settings size={12} />
-                                                </motion.span>
-                                            ) : state === 'syncing' ? (
-                                                <motion.span key="sync" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2">
-                                                    Syncing <RefreshCw size={12} className="animate-spin" />
-                                                </motion.span>
-                                            ) : (
-                                                <motion.span key="active" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2">
-                                                    Ready <CheckCircle2 size={12} />
-                                                </motion.span>
-                                            )}
-                                        </AnimatePresence>
-                                    </button>
-                                </div>
+                                <AnimatePresence>
+                                    {state !== 'active' && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="agent-footer"
+                                        >
+                                            <button
+                                                onClick={() => handleConfigure(agent.id)}
+                                                disabled={state !== 'idle'}
+                                                className={`btn btn-sm !py-2.5 !px-5 !rounded-lg text-[10px] font-black uppercase tracking-widest transition-all w-full
+                                                    ${state === 'idle' ? 'btn-secondary' : state === 'syncing' ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-emerald-50 text-emerald-600 border-emerald-200'}
+                                                `}
+                                            >
+                                                <AnimatePresence mode="wait">
+                                                    {state === 'idle' ? (
+                                                        <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-center gap-2">
+                                                            Configure <Settings size={12} />
+                                                        </motion.span>
+                                                    ) : state === 'syncing' ? (
+                                                        <motion.span key="sync" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-center gap-2">
+                                                            Syncing <RefreshCw size={12} className="animate-spin" />
+                                                        </motion.span>
+                                                    ) : (
+                                                        <motion.span key="active" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center justify-center gap-2">
+                                                            Ready <CheckCircle2 size={12} />
+                                                        </motion.span>
+                                                    )}
+                                                </AnimatePresence>
+                                            </button>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </motion.div>
                         );
                     })}
