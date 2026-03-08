@@ -74,38 +74,45 @@ export const ContactUs = () => {
                         ) : (
                             <>
                                 <div className="form-group">
-                                    <label>Name</label>
+                                    <label htmlFor="name">Name</label>
                                     <input
+                                        id="name"
                                         type="text"
                                         placeholder="John Doe"
                                         required
                                         value={formData.name}
                                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                        aria-required="true"
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label>Work Email</label>
+                                    <label htmlFor="email">Work Email</label>
                                     <input
+                                        id="email"
                                         type="email"
                                         placeholder="john@company.com"
                                         required
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                        aria-required="true"
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <label>Message</label>
+                                    <label htmlFor="message">Message</label>
                                     <textarea
+                                        id="message"
                                         placeholder="How can we help?"
                                         required
                                         value={formData.message}
                                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                        aria-required="true"
                                     ></textarea>
                                 </div>
                                 <button
                                     className="btn btn-primary w-full"
                                     type="submit"
                                     disabled={status === 'loading'}
+                                    aria-label={status === 'loading' ? "Sending message" : "Send message to partnership team"}
                                 >
                                     {status === 'loading' ? (
                                         <><Loader2 className="animate-spin mr-2" size={18} /> Processing...</>

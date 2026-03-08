@@ -1,8 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, MessageSquare, Mail, Calendar, Settings, RefreshCw, CheckCircle2, Terminal, Power } from 'lucide-react';
 import { Canvas } from '@react-three/fiber';
-import { AICore } from '../components/canvas/AICore';
+
+// Lazy load Three.js component to improve initial TBT
+const AICore = lazy(() => import('../components/canvas/AICore').then(module => ({ default: module.AICore })));
 
 const agents = [
     {
@@ -92,6 +94,7 @@ const CommandStream = ({ agentId, onStop }: { agentId: string, onStop: () => voi
                 <button
                     onClick={onStop}
                     className="flex items-center gap-1.5 text-[9px] font-bold text-rose-500 hover:text-rose-400 hover:bg-rose-500/10 px-2 py-1 rounded transition-colors tracking-widest uppercase"
+                    aria-label={`Deactivate ${agentId} agent`}
                 >
                     <Power size={10} /> Deactivate
                 </button>
@@ -204,6 +207,7 @@ export const AgentStudio = () => {
                                                 className={`btn btn-sm !py-2.5 !px-5 !rounded-lg text-[10px] font-black uppercase tracking-widest transition-all w-full
                                                     ${state === 'idle' ? 'btn-secondary' : state === 'syncing' ? 'bg-amber-50 text-amber-600 border-amber-200' : 'bg-emerald-50 text-emerald-600 border-emerald-200'}
                                                 `}
+                                                aria-label={`Configure ${agent.name} module`}
                                             >
                                                 <AnimatePresence mode="wait">
                                                     {state === 'idle' ? (
@@ -230,9 +234,11 @@ export const AgentStudio = () => {
                 </div>
 
                 <div className="section-mascot mt-32 h-[400px]">
-                    <Canvas camera={{ position: [0, 0, 4], fov: 35 }} dpr={[1, 2]}>
-                        <AICore />
-                    </Canvas>
+                    <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-slate-400 font-mono text-[10px] tracking-widest">INITIALIZING CORES...</div>}>
+                        <Canvas camera={{ position: [0, 0, 4], fov: 35 }} dpr={[1, 2]}>
+                            <AICore />
+                        </Canvas>
+                    </Suspense>
                 </div>
             </div>
         </section>

@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
-import { AICore } from '../components/canvas/AICore';
-import { GridBackground } from '../components/canvas/GridBackground';
+import { lazy, Suspense } from 'react';
 import { ArrowRight } from 'lucide-react';
+
+const AICore = lazy(() => import('../components/canvas/AICore').then(module => ({ default: module.AICore })));
+const GridBackground = lazy(() => import('../components/canvas/GridBackground').then(module => ({ default: module.GridBackground })));
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -60,12 +62,14 @@ export const Hero = () => {
                         <button
                             className="btn btn-primary btn-lg !rounded-full !px-10"
                             onClick={() => window.open('https://calendly.com/tasmiyasiddiqui457/quick-discovery-call', '_blank')}
+                            aria-label="Deploy Autonomous Agent - Schedule Calendly Call"
                         >
                             Deploy Agent
                         </button>
                         <button
                             className="btn btn-secondary btn-lg group !rounded-full !px-10"
                             onClick={() => document.getElementById('studio')?.scrollIntoView({ behavior: 'smooth' })}
+                            aria-label="Explore Infrastructure Solutions"
                         >
                             Explore Solutions
                             <ArrowRight size={18} className="ml-2 transition-transform group-hover:translate-x-1" />
@@ -104,10 +108,12 @@ export const Hero = () => {
                     whileInView={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1.2, delay: 0.8 }}
                 >
-                    <Canvas camera={{ position: [0, 0, 4], fov: 35 }} dpr={[1, 2]}>
-                        <GridBackground />
-                        <AICore />
-                    </Canvas>
+                    <Suspense fallback={<div className="w-full h-full bg-slate-50 animate-pulse rounded-2xl" />}>
+                        <Canvas camera={{ position: [0, 0, 4], fov: 35 }} dpr={[1, 2]}>
+                            <GridBackground />
+                            <AICore />
+                        </Canvas>
+                    </Suspense>
                 </motion.div>
             </div>
         </section>

@@ -18,8 +18,10 @@
   --accent-success: #10B981;
 
   --text-main: #0F172B;
-  --text-muted: #64748B;
-  --text-ghost: #94A3B8;
+  --text-muted: #475569;
+  /* Slate 600 for better contrast (WCAG AA) */
+  --text-ghost: #64748B;
+  /* Slate 500 for better legibility */
 
   --border-subtle: rgba(15, 23, 42, 0.04);
   --border-strong: rgba(15, 23, 42, 0.08);
@@ -94,12 +96,12 @@ section {
 }
 
 .card {
-  background: var(--bg-primary);
+  background: var(--bg-elevated);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--shadow-expensive);
   padding: 40px;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--border-subtle);
   position: relative;
   overflow: hidden;
 }
@@ -122,12 +124,14 @@ section {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-premium);
-  border-color: var(--border-premium);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-primary);
 }
 
 .btn {
   padding: 12px 32px;
+  min-height: 48px;
+  /* Minimum touch target height */
   border-radius: 12px;
   /* Precision corner */
   font-weight: 600;
@@ -136,11 +140,13 @@ section {
   font-size: 0.95rem;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   border: none;
   text-decoration: none;
   position: relative;
 }
+
 
 /* Expensive Primary Button */
 .btn-primary {

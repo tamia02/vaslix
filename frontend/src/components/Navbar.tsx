@@ -10,7 +10,7 @@ export const Navbar = () => {
     return (
         <nav className="navbar">
             <div className="nav-container">
-                <a href="/" className="nav-logo">
+                <a href="/" className="nav-logo" aria-label="Vaslix Home">
                     <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/20">
                             <Shield size={18} color="white" strokeWidth={2.5} />
@@ -19,11 +19,11 @@ export const Navbar = () => {
                     </div>
                 </a>
 
-                <div className="nav-links hidden md:flex">
-                    <a href="#results">Infrastructure</a>
-                    <a href="#capabilities">Capabilities</a>
-                    <a href="#studio">Studio</a>
-                    <a href="#pricing">Capital</a>
+                <div className="nav-links hidden md:flex" role="navigation">
+                    <a href="#results" aria-label="View Infrastructure Performance">Infrastructure</a>
+                    <a href="#capabilities" aria-label="Explore Platform Capabilities">Capabilities</a>
+                    <a href="#studio" aria-label="Access Agent Studio">Studio</a>
+                    <a href="#pricing" aria-label="View Pricing and Capital Allocation">Capital</a>
                 </div>
 
                 <div className="nav-right">
@@ -42,7 +42,12 @@ export const Navbar = () => {
                         </button>
                     </div>
 
-                    <button className="md:hidden text-slate-900" onClick={toggleMenu}>
+                    <button
+                        className="md:hidden text-slate-900 p-2"
+                        onClick={toggleMenu}
+                        aria-label={isOpen ? "Close Menu" : "Open Menu"}
+                        aria-expanded={isOpen}
+                    >
                         {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>

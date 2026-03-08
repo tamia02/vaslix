@@ -89,12 +89,15 @@ export const Results = () => {
                                 <span className="company-name">{study.company}</span>
                                 <h3>{study.result}</h3>
                                 <p>{study.description}</p>
-                                <button className="btn btn-secondary !px-6 text-[11px] font-bold uppercase tracking-widest">
+                                <button
+                                    className="btn btn-secondary !px-6 text-[11px] font-bold uppercase tracking-widest"
+                                    aria-label={`View technical breakdown for ${study.company} case study`}
+                                >
                                     Technical Breakdown <ArrowRight size={14} className="ml-2" />
                                 </button>
                             </div>
                             <div className="study-image">
-                                <img src={study.image} alt={study.company} />
+                                <img src={study.image} alt={`${study.company} result visualization`} loading="lazy" />
                             </div>
                         </motion.div>
                     ))}
