@@ -4,7 +4,7 @@ from app.utils.auth import get_current_user
 router = APIRouter()
 
 @router.get("/stats")
-async def get_analytics_stats():
+async def get_analytics_stats(current_user_id: int = Depends(get_current_user)):
     """Get high-level operational performance metrics"""
     return [
         {"label": "Network Nodes", "value": "1,284"},
@@ -14,7 +14,7 @@ async def get_analytics_stats():
     ]
 
 @router.get("/flow")
-async def get_live_flow():
+async def get_live_flow(current_user_id: int = Depends(get_current_user)):
     """Get mock data for the live execution visualizer"""
     import random
     return [random.randint(30, 95) for _ in range(15)]

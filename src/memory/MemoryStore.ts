@@ -19,7 +19,6 @@ export class MemoryStore {
             memories.push(entry);
         }
         this.memoryMap.set(leadId, memories);
-        console.log(`Stored memory for lead ${leadId}: ${entry.key}=${entry.value}`);
     }
 
     async retrieve(leadId: string, key: string): Promise<any | undefined> {

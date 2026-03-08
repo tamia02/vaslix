@@ -2,9 +2,9 @@ from pydantic_settings import BaseSettings
 from typing import Optional
 
 class Settings(BaseSettings):
-    database_url: str = "postgresql://user:password@localhost:5432/vaslix_db"
+    database_url: str
     redis_url: str = "redis://localhost:6379"
-    secret_key: str = "your-super-secret-key-here"
+    secret_key: str
     algorithm: str = "HS256"
     openai_api_key: Optional[str] = None
     deepgram_api_key: Optional[str] = None

@@ -6,7 +6,7 @@ export class SchedulingService {
     }
 
     async getAvailability(startDate: Date, endDate: Date): Promise<string[]> {
-        console.log(`Fetching availability from ${startDate} to ${endDate}`);
+        // Redacted for security
         // Real-time integration placeholder
         return [
             new Date(Date.now() + 86400000).toISOString(), // Tomorrow same time
@@ -15,7 +15,7 @@ export class SchedulingService {
     }
 
     async bookMeeting(leadEmail: string, slot: string): Promise<boolean> {
-        console.log(`Booking meeting for ${leadEmail} at ${slot}`);
+        // Redacted for security
         // Placeholder logic
         return true;
     }

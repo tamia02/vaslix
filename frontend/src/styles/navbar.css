@@ -85,5 +85,51 @@
     letter-spacing: 1.5px;
     text-transform: uppercase;
     border-radius: 4px;
-    /* Sharper architectural corner */
+}
+
+/* Mobile Menu Styles */
+.mobile-menu {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    width: 100%;
+    background: var(--bg-elevated);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--border-strong);
+    padding: 32px;
+    z-index: 999;
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.mobile-nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.mobile-nav-btn {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    font-size: 14px;
+    font-weight: 950;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: left;
+    padding: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        padding: 0 20px;
+    }
 }

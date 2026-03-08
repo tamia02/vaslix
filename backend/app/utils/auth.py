@@ -27,7 +27,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(
         to_encode, 
-        os.getenv("SECRET_KEY", "dev-secret-key"), 
+        os.getenv("SECRET_KEY"), 
         algorithm=os.getenv("ALGORITHM", "HS256")
     )
     return encoded_jwt
@@ -42,7 +42,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(
             token, 
-            os.getenv("SECRET_KEY", "dev-secret-key"), 
+            os.getenv("SECRET_KEY"), 
             algorithms=[os.getenv("ALGORITHM", "HS256")]
         )
         user_id: int = payload.get("sub")

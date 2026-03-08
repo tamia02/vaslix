@@ -2,7 +2,8 @@ import { LeadStatus } from '../types';
 
 export class ActionDispatcher {
     async dispatch(action: string, metadata: any): Promise<void> {
-        console.log(`Dispatching action: ${action}`, metadata);
+        // Log action type but redact metadata for security
+        console.log(`Dispatching action: ${action} [metadata redacted]`);
 
         switch (action) {
             case 'ESCALATE':

@@ -132,3 +132,37 @@
         right: 0;
     }
 }
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 140px 0 80px;
+    }
+
+    .hero-title {
+        font-size: clamp(3rem, 15vw, 5rem);
+        margin-bottom: 32px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 48px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero-badges-layer {
+        display: none;
+        /* Hide floating badges on mobile to reduce clutter */
+    }
+}
