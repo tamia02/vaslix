@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, MessageSquare, Mail, Calendar, Settings, RefreshCw, CheckCircle2, Terminal, Power } from 'lucide-react';
 import { Canvas } from '@react-three/fiber';
-
-// Lazy load Three.js component to improve initial TBT
-const AICore = lazy(() => import('../components/canvas/AICore').then(module => ({ default: module.AICore })));
+import { AICore } from '../components/canvas/AICore';
 
 const agents = [
     {
@@ -234,11 +232,9 @@ export const AgentStudio = () => {
                 </div>
 
                 <div className="section-mascot mt-32 h-[400px]">
-                    <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-slate-400 font-mono text-[10px] tracking-widest">INITIALIZING CORES...</div>}>
-                        <Canvas camera={{ position: [0, 0, 4], fov: 35 }} dpr={[1, 2]}>
-                            <AICore />
-                        </Canvas>
-                    </Suspense>
+                    <Canvas camera={{ position: [0, 0, 4], fov: 35 }} dpr={[1, 2]}>
+                        <AICore />
+                    </Canvas>
                 </div>
             </div>
         </section>

@@ -1,0 +1,43 @@
+﻿
+> vaslix-frontend@0.1.0 build
+> tsc && vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 2272 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                 [39m[1m[2m    0.50 kB[22m[1m[22m[2m Γöé gzip:   0.33 kB[22m
+[2mdist/[22m[35massets/index-CxaYiWVG.css  [39m[1m[2m   21.98 kB[22m[1m[22m[2m Γöé gzip:   4.94 kB[22m
+[2mdist/[22m[36massets/index-DQnUmzbz.js   [39m[1m[33m1,185.86 kB[39m[22m[2m Γöé gzip: 340.83 kB[22m
+node.exe : [33m
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: ([3  
+  3m:String) [], RemoteE   
+ xception
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+(!) Some chunks are larger 
+than 500 kB after 
+minification. Consider:
+- Using dynamic import() 
+to code-split the 
+application
+- Use build.rollupOptions.o
+utput.manualChunks to 
+improve chunking: https://r
+ollupjs.org/configuration-o
+ptions/#output-manualchunks
+- Adjust chunk size limit 
+for this warning via build.
+chunkSizeWarningLimit.[39m
+[32mΓ£ô built in 10.98s[39m
